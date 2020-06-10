@@ -55,7 +55,14 @@ def main():
             else:
                 print("Student number does not exist in the student directory.")
         elif choice == "e":
-            pass
+            print("\nDELETE STUDENT")
+            key = input("    Enter student number: ")
+            if studDir.check_if_student_exist(key):
+                studDir.delete_student(key)
+
+                print("\nStudent removed from the student directory successfully.\n")
+            else:
+                print("Student number does not exist in the student directory.")
         elif choice == "f":
             pass
         elif choice == "g":

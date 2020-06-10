@@ -48,9 +48,8 @@ class StudentDirectory(object):
         # also needs to be edited
         self.add_new_student(key, value)
 
-    def delete_student(self):
-        # todo
-        pass
+    def delete_student(self, key):
+        del self.studDirDict[key]
 
     def clear_student_directory(self):
         # todo
