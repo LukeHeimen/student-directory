@@ -21,7 +21,7 @@ class StudentDirectory(object):
         self.studDirDict[key] = value
 
     def view_student_details(self, key):
-        if self.studDirDict.get(key) != None:
+        if self.check_if_student_exist(key):
             value = self.studDirDict[key]
             print("    Student Number:", key)
             print("      Name:", value[0])
@@ -30,7 +30,7 @@ class StudentDirectory(object):
             print("      Email Address:", value[3])
             print("      Contact Number:", value[4])
         else:
-            print("Student number does not exist in the student directory")
+            print("Student number does not exist in the student directory.")
 
     def show_student_directory(self):
         for key, value in self.studDirDict.items():
@@ -41,9 +41,12 @@ class StudentDirectory(object):
             print("      Email Address:", value[3])
             print("      Contact Number:", value[4])
 
-    def edit_student_details(self):
-        # todo
-        pass
+    def edit_student_details(self, key, value):
+        # because the method is just the same as adding a new student,
+        # the add_new_student method is called instead
+        # method to be changed if the student number of the student
+        # also needs to be edited
+        self.add_new_student(key, value)
 
     def delete_student(self):
         # todo
@@ -57,3 +60,6 @@ class StudentDirectory(object):
         jsonFile = open("student-list.json", "w")
         json.dump(self.studDirDict, jsonFile, indent = 4)
         jsonFile.close()
+
+    def check_if_student_exist(self, studentNumber):
+        return self.studDirDict.get(studentNumber) != None

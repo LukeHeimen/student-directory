@@ -1,4 +1,3 @@
-import json
 import sys
 
 import studentdirectory as sd
@@ -29,7 +28,7 @@ def main():
             value = [detail0, detail1, detail2, detail3, detail4]
             studDir.add_new_student(key, value)
 
-            print("New student added to directory successfully.\n")
+            print("\nNew student added to directory successfully.\n")
         elif choice == "b":
             print("\nVIEW STUDENT DETAILS")
             key = input("    Enter student number: ")
@@ -40,16 +39,30 @@ def main():
             studDir.show_student_directory()
             print(" ")
         elif choice == "d":
-            pass
+            print("\nEDIT STUDENT DETAILS")
+            key = input("    Enter student number: ")
+            if studDir.check_if_student_exist(key):
+                detail0 = input("    Enter student's new name: ")
+                detail1 = input("    Enter student's new couse and year: ")
+                detail2 = input("    Enter student's new age: ")
+                detail3 = input("    Enter student's new email address: ")
+                detail4 = input("    Enter student's new contact number: ")
+
+                value = [detail0, detail1, detail2, detail3, detail4]
+                studDir.edit_student_details(key, value)
+
+                print("\nStudent's details edited successfully.\n")
+            else:
+                print("Student number does not exist in the student directory.")
         elif choice == "e":
             pass
         elif choice == "f":
             pass
         elif choice == "g":
-            print("\nSaving changes to JSON file.")
+            print("\nSaving student directory changes to JSON file.")
             studDir.save_changes()
+            print("Done. Bye.")
 
-            print("Bye.")
             sys.exit(0)
 
 if __name__ == "__main__": main()
