@@ -4,21 +4,10 @@ import sys
 import studentdirectory as sd
 
 def main():
-
-    try:
-        # open JSON file and get its contents
-        jsonFile = open("student-list.json", "r")
-        fileDict = json.load(jsonFile)
-    except json.decoder.JSONDecodeError:
-        # JSON file is empty, proceeds to making an empty dict
-        fileDict = {}
-    finally:
-        jsonFile.close()
-
-    studDict = sd.StudentDirectory(fileDict)
+    studDir = sd.StudentDirectory()
 
     while(1):
-        print("STUDENT DIRECTORY MENU")
+        print("\nSTUDENT DIRECTORY MENU")
         print("    [a] Add New Student")
         print("    [b] View Student Details")
         print("    [c] Show Student Directory")
@@ -29,11 +18,27 @@ def main():
         choice = input("Enter choice: ")
 
         if choice == "a":
-            pass
+            print("\nADD NEW Student")
+            key = input("    Enter new student's student number: ")
+            detail0 = input("    Enter new student's name: ")
+            detail1 = input("    Enter new student's couse and year: ")
+            detail2 = input("    Enter new student's age: ")
+            detail3 = input("    Enter new student's email address: ")
+            detail4 = input("    Enter new student's contact number: ")
+
+            value = [detail0, detail1, detail2, detail3, detail4]
+            studDir.add_new_student(key, value)
+
+            print("New student added to directory successfully.\n")
         elif choice == "b":
-            pass
+            print("\nVIEW STUDENT DETAILS")
+            key = input("    Enter student number: ")
+            studDir.view_student_details(key)
+            print(" ")
         elif choice == "c":
-            pass
+            print("\nSHOW STUDENT DIRECTORY")
+            studDir.show_student_directory()
+            print(" ")
         elif choice == "d":
             pass
         elif choice == "e":
@@ -41,11 +46,10 @@ def main():
         elif choice == "f":
             pass
         elif choice == "g":
-            pass
+            print("\nSaving changes to JSON file.")
+            studDir.save_changes()
 
-
-    # json_file_w = open("student-list.json", "w")
-    # json.dump(data_dict, json_file_w, indent = 4)
-    # json_file_w.close()
+            print("Bye.")
+            sys.exit(0)
 
 if __name__ == "__main__": main()
