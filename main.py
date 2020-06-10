@@ -20,7 +20,7 @@ def main():
             print("\nADD NEW Student")
             key = input("    Enter new student's student number: ")
             detail0 = input("    Enter new student's name: ")
-            detail1 = input("    Enter new student's couse and year: ")
+            detail1 = input("    Enter new student's course and year: ")
             detail2 = input("    Enter new student's age: ")
             detail3 = input("    Enter new student's email address: ")
             detail4 = input("    Enter new student's contact number: ")
@@ -43,7 +43,7 @@ def main():
             key = input("    Enter student number: ")
             if studDir.check_if_student_exist(key):
                 detail0 = input("    Enter student's new name: ")
-                detail1 = input("    Enter student's new couse and year: ")
+                detail1 = input("    Enter student's new course and year: ")
                 detail2 = input("    Enter student's new age: ")
                 detail3 = input("    Enter student's new email address: ")
                 detail4 = input("    Enter student's new contact number: ")
@@ -75,14 +75,18 @@ def main():
             if decision == "y":
                 print("\nClearing student directory...")
                 studDir.clear_student_directory()
-                print("Clearing student directory successfull.\n")
+                print("Clearing student directory successful.\n")
             elif decision == "n":
                 print("\n    Good call. Going back to the menu...")
+            else:
+                print("\nNonexistent decision. Going back to the menu...")
         elif choice == "g":
             print("\nSaving student directory changes to JSON file.")
             studDir.save_changes()
-            print("Done. Ha en god dag.") # have a good day in Norsk whatevs kek
+            print("Done. Ha en god dag, xaijian") # have a good day goodbye
 
             sys.exit(0)
+        else:
+            print("\nNonexistent choice.")
 
 if __name__ == "__main__": main()
