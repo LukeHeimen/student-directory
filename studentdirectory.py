@@ -52,8 +52,7 @@ class StudentDirectory(object):
         del self.studDirDict[key]
 
     def clear_student_directory(self):
-        # todo
-        pass
+        self.studDirDict.clear()
 
     def save_changes(self):
         jsonFile = open("student-list.json", "w")

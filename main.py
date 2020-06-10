@@ -53,22 +53,35 @@ def main():
 
                 print("\nStudent's details edited successfully.\n")
             else:
-                print("Student number does not exist in the student directory.")
+                print("Student number does not exist in " +
+                      "the student directory.")
         elif choice == "e":
             print("\nDELETE STUDENT")
             key = input("    Enter student number: ")
             if studDir.check_if_student_exist(key):
                 studDir.delete_student(key)
 
-                print("\nStudent removed from the student directory successfully.\n")
+                print("\nStudent removed from the student " + 
+                      "directory successfully.\n")
             else:
-                print("Student number does not exist in the student directory.")
+                print("Student number does not exist in " +
+                      "the student directory.")
         elif choice == "f":
-            pass
+            print("\nCLEAR STUDENT DIRECTORY")
+            print("    WARNING! This will delete all entries in the " + 
+                  "student directory. Do you really want to proceed?")
+            decision = input("        [y]es or [n]o: ")
+
+            if decision == "y":
+                print("\nClearing student directory...")
+                studDir.clear_student_directory()
+                print("Clearing student directory successfull.\n")
+            elif decision == "n":
+                print("\n    Good call. Going back to the menu...")
         elif choice == "g":
             print("\nSaving student directory changes to JSON file.")
             studDir.save_changes()
-            print("Done. Bye.")
+            print("Done. Ha en god dag.") # have a good day in Norsk whatevs kek
 
             sys.exit(0)
 
