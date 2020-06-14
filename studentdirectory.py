@@ -9,20 +9,20 @@ class StudentDirectory(object):
         """
         try:
             # open JSON file and get its contents
-            jsonFile = open("student-list.json", "r")
-            self.studDirDict = json.load(jsonFile)
+            json_file = open("student-list.json", "r")
+            self.stud_dir_dict = json.load(json_file)
         except json.decoder.JSONDecodeError:
             # JSON file is empty, proceeds to making an empty dict
-            self.studDirDict = {}
+            self.stud_dir_dict = {}
         finally:
-            jsonFile.close()
+            json_file.close()
 
-    def add_new_student(self, key, value):
-        self.studDirDict[key] = value
+    def AddNewStudent(self, key, value):
+        self.stud_dir_dict[key] = value
 
-    def view_student_details(self, key):
-        if self.check_if_student_exist(key):
-            value = self.studDirDict[key]
+    def ViewStudentDetails(self, key):
+        if self.CheckIfStudentExist(key):
+            value = self.stud_dir_dict[key]
             print("    Student Number:", key)
             print("      Name:", value[0])
             print("      Course and Year:", value[1])
@@ -32,8 +32,8 @@ class StudentDirectory(object):
         else:
             print("Student number does not exist in the student directory.")
 
-    def show_student_directory(self):
-        for key, value in self.studDirDict.items():
+    def ShowStudentDirectory(self):
+        for key, value in self.stud_dir_dict.items():
             print("    Student Number:", key)
             print("      Name:", value[0])
             print("      Course and Year:", value[1])
@@ -41,23 +41,23 @@ class StudentDirectory(object):
             print("      Email Address:", value[3])
             print("      Contact Number:", value[4])
 
-    def edit_student_details(self, key, value):
+    def EditStudentDetails(self, key, value):
         # because the method is just the same as adding a new student,
-        # the add_new_student method is called instead
+        # the AddNewStudent method is called instead
         # method to be changed if the student number of the student
         # also needs to be edited
-        self.add_new_student(key, value)
+        self.AddNewStudent(key, value)
 
-    def delete_student(self, key):
-        del self.studDirDict[key]
+    def DeleteStudent(self, key):
+        del self.stud_dir_dict[key]
 
-    def clear_student_directory(self):
-        self.studDirDict.clear()
+    def ClearStudentDirectory(self):
+        self.stud_dir_dict.clear()
 
-    def save_changes(self):
-        jsonFile = open("student-list.json", "w")
-        json.dump(self.studDirDict, jsonFile, indent = 4)
-        jsonFile.close()
+    def SaveChanges(self):
+        json_file = open("student-list.json", "w")
+        json.dump(self.stud_dir_dict, json_file, indent = 4)
+        json_file.close()
 
-    def check_if_student_exist(self, studentNumber):
-        return self.studDirDict.get(studentNumber) != None
+    def CheckIfStudentExist(self, student_number):
+        return self.stud_dir_dict.get(student_number) != None

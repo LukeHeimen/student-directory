@@ -3,7 +3,7 @@ import sys
 import studentdirectory as sd
 
 def main():
-    studDir = sd.StudentDirectory()
+    stud_dir = sd.StudentDirectory()
 
     while(1):
         print("\nSTUDENT DIRECTORY MENU")
@@ -26,22 +26,22 @@ def main():
             detail4 = input("    Enter new student's contact number: ")
 
             value = [detail0, detail1, detail2, detail3, detail4]
-            studDir.add_new_student(key, value)
+            stud_dir.AddNewStudent(key, value)
 
             print("\nNew student added to directory successfully.\n")
         elif choice == "b":
             print("\nVIEW STUDENT DETAILS")
             key = input("    Enter student number: ")
-            studDir.view_student_details(key)
+            stud_dir.ViewStudentDetails(key)
             print(" ")
         elif choice == "c":
             print("\nSHOW STUDENT DIRECTORY")
-            studDir.show_student_directory()
+            stud_dir.ShowStudentDirectory()
             print(" ")
         elif choice == "d":
             print("\nEDIT STUDENT DETAILS")
             key = input("    Enter student number: ")
-            if studDir.check_if_student_exist(key):
+            if stud_dir.CheckIfStudentExist(key):
                 detail0 = input("    Enter student's new name: ")
                 detail1 = input("    Enter student's new course and year: ")
                 detail2 = input("    Enter student's new age: ")
@@ -49,32 +49,32 @@ def main():
                 detail4 = input("    Enter student's new contact number: ")
 
                 value = [detail0, detail1, detail2, detail3, detail4]
-                studDir.edit_student_details(key, value)
+                stud_dir.EditStudentDetails(key, value)
 
                 print("\nStudent's details edited successfully.\n")
             else:
-                print("Student number does not exist in " +
-                      "the student directory.")
+                print("Student number does not exist in "
+                      + "the student directory.")
         elif choice == "e":
             print("\nDELETE STUDENT")
             key = input("    Enter student number: ")
-            if studDir.check_if_student_exist(key):
-                studDir.delete_student(key)
+            if stud_dir.CheckIfStudentExist(key):
+                stud_dir.DeleteStudent(key)
 
-                print("\nStudent removed from the student " + 
-                      "directory successfully.\n")
+                print("\nStudent removed from the student "
+                      + "directory successfully.\n")
             else:
-                print("Student number does not exist in " +
-                      "the student directory.")
+                print("Student number does not exist in "
+                      + "the student directory.")
         elif choice == "f":
             print("\nCLEAR STUDENT DIRECTORY")
-            print("    WARNING! This will delete all entries in the " + 
-                  "student directory. Do you really want to proceed?")
+            print("    WARNING! This will delete all entries in the "
+                  +  "student directory. Do you really want to proceed?")
             decision = input("        [y]es or [n]o: ")
 
             if decision == "y":
                 print("\nClearing student directory...")
-                studDir.clear_student_directory()
+                stud_dir.ClearStudentDirectory()
                 print("Clearing student directory successful.\n")
             elif decision == "n":
                 print("\n    Good call. Going back to the menu...")
@@ -82,8 +82,8 @@ def main():
                 print("\nNonexistent decision. Going back to the menu...")
         elif choice == "g":
             print("\nSaving student directory changes to JSON file.")
-            studDir.save_changes()
-            print("Done. Ha en god dag, xaijian") # have a good day goodbye
+            stud_dir.SaveChanges()
+            print("Done. Bye.")
 
             sys.exit(0)
         else:
