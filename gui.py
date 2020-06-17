@@ -78,6 +78,20 @@ while True:
             operation = 1
         elif event == "-DELETE-":
             operation = 2
+    if event in "-CLEAR-":
+        for key in input_keys:
+            window[key].update(value="", disabled=True)
+            window["-ENTER-"].update(disabled=True)
+            window["-SEARCH-"].update(disabled=True)
+
+        choice = sg.popup_yes_no("WARNING! This will delete all entries\n"
+                        + "in the student directory. Do you want to proceed?")
+        if choice == "Yes":
+            data.clear()
+            window["-TABLE-"].update(values=data)
+            data_index = -1
+        elif choice == "No":
+            pass
 
     if event == "-ENTER-":
         if operation == 1:
@@ -150,7 +164,7 @@ while True:
                     if value == data_row[1]:
                         row_no = int(data_row[0]) - 1
                         choice = sg.popup_yes_no("Student %s " % value
-                                                 + "will be deleted. "
+                                                 + "will be deleted.\n"
                                                  + "Do you want to proceed?")
                         if choice == "Yes":
                             data.pop(row_no)
