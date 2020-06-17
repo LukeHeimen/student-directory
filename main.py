@@ -26,22 +26,22 @@ def main():
             detail4 = input("    Enter new student's contact number: ")
 
             value = [detail0, detail1, detail2, detail3, detail4]
-            stud_dir.AddNewStudent(key, value)
+            stud_dir.add_new_student(key, value)
 
             print("\nNew student added to directory successfully.\n")
         elif choice == "b":
             print("\nVIEW STUDENT DETAILS")
             key = input("    Enter student number: ")
-            stud_dir.ViewStudentDetails(key)
+            stud_dir.view_student_details(key)
             print(" ")
         elif choice == "c":
             print("\nSHOW STUDENT DIRECTORY")
-            stud_dir.ShowStudentDirectory()
+            stud_dir.show_student_directory()
             print(" ")
         elif choice == "d":
             print("\nEDIT STUDENT DETAILS")
             key = input("    Enter student number: ")
-            if stud_dir.CheckIfStudentExist(key):
+            if stud_dir.check_if_student_exist(key):
                 detail0 = input("    Enter student's new name: ")
                 detail1 = input("    Enter student's new course and year: ")
                 detail2 = input("    Enter student's new age: ")
@@ -49,7 +49,7 @@ def main():
                 detail4 = input("    Enter student's new contact number: ")
 
                 value = [detail0, detail1, detail2, detail3, detail4]
-                stud_dir.EditStudentDetails(key, value)
+                stud_dir.edit_student_details(key, value)
 
                 print("\nStudent's details edited successfully.\n")
             else:
@@ -58,8 +58,8 @@ def main():
         elif choice == "e":
             print("\nDELETE STUDENT")
             key = input("    Enter student number: ")
-            if stud_dir.CheckIfStudentExist(key):
-                stud_dir.DeleteStudent(key)
+            if stud_dir.check_if_student_exist(key):
+                stud_dir.delete_student(key)
 
                 print("\nStudent removed from the student "
                       + "directory successfully.\n")
@@ -74,7 +74,7 @@ def main():
 
             if decision == "y":
                 print("\nClearing student directory...")
-                stud_dir.ClearStudentDirectory()
+                stud_dir.clear_student_directory()
                 print("Clearing student directory successful.\n")
             elif decision == "n":
                 print("\n    Good call. Going back to the menu...")
@@ -82,7 +82,7 @@ def main():
                 print("\nNonexistent decision. Going back to the menu...")
         elif choice == "g":
             print("\nSaving student directory changes to JSON file.")
-            stud_dir.SaveChanges()
+            stud_dir.save_changes()
             print("Done. Bye.")
 
             sys.exit(0)

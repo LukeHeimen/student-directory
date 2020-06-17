@@ -17,11 +17,11 @@ class StudentDirectory(object):
         finally:
             json_file.close()
 
-    def AddNewStudent(self, key, value):
+    def add_new_student(self, key, value):
         self.stud_dir_dict[key] = value
 
-    def ViewStudentDetails(self, key):
-        if self.CheckIfStudentExist(key):
+    def view_student_details(self, key):
+        if self.check_if_student_exist(key):
             value = self.stud_dir_dict[key]
             print("    Student Number:", key)
             print("      Name:", value[0])
@@ -32,7 +32,7 @@ class StudentDirectory(object):
         else:
             print("Student number does not exist in the student directory.")
 
-    def ShowStudentDirectory(self):
+    def show_student_directory(self):
         for key, value in self.stud_dir_dict.items():
             print("    Student Number:", key)
             print("      Name:", value[0])
@@ -41,23 +41,23 @@ class StudentDirectory(object):
             print("      Email Address:", value[3])
             print("      Contact Number:", value[4])
 
-    def EditStudentDetails(self, key, value):
+    def edit_student_details(self, key, value):
         # because the method is just the same as adding a new student,
-        # the AddNewStudent method is called instead
+        # the add_new_student method is called instead
         # method to be changed if the student number of the student
         # also needs to be edited
-        self.AddNewStudent(key, value)
+        self.add_new_student(key, value)
 
-    def DeleteStudent(self, key):
+    def delete_student(self, key):
         del self.stud_dir_dict[key]
 
-    def ClearStudentDirectory(self):
+    def clear_student_directory(self):
         self.stud_dir_dict.clear()
 
-    def SaveChanges(self):
+    def save_changes(self):
         json_file = open("student-list.json", "w")
         json.dump(self.stud_dir_dict, json_file, indent = 4)
         json_file.close()
 
-    def CheckIfStudentExist(self, student_number):
+    def check_if_student_exist(self, student_number):
         return self.stud_dir_dict.get(student_number) != None
