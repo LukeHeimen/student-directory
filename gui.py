@@ -143,6 +143,33 @@ while True:
                     window["-SEARCH-"].update(disabled=True)
                 window["-SN-"].update(disabled=True)
         elif operation == 2: # DELETE
-            pass
+            value = values["-SN-"]
+            counter = 0
+            if value:
+                for data_row in data:
+                    if value == data_row[1]:
+                        row_no = int(data_row[0]) - 1
+                        choice = sg.popup_yes_no("Student %s " % value
+                                                 + "will be deleted. "
+                                                 + "Do you want to proceed?")
+                        if choice == "Yes":
+                            data.pop(row_no)
+                            for j in range(row_no, len(data)):
+                                data[j][0] = str(j + 1)
+                            window["-TABLE-"].update(values=data)
+                            window["-SN-"].update(value="", disabled=True)
+                            window["-SEARCH-"].update(disabled=True)
+                            data_index -= 1
+                        if choice == "No":
+                            pass
+                        counter = 0
+                        break
+                    else:
+                        counter += 1
+            else:
+                sg.popup("Student number cannot be empty!")
+
+            if counter > 0:
+                sg.popup("Student number does not exist!")
 
 window.close()
