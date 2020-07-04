@@ -1,8 +1,9 @@
 import sys
 
 import studentdirectory as sd
+import gui
 
-def main():
+def main_for_command_line():
     stud_dir = sd.StudentDirectory()
 
     while(1):
@@ -88,5 +89,9 @@ def main():
             sys.exit(0)
         else:
             print("\nNonexistent choice.")
+
+def main():
+    # main_for_command_line()
+    gui.GUI()
 
 if __name__ == "__main__": main()
