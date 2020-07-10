@@ -7,6 +7,8 @@ class StudentDirectory(object):
             key: student number
             value: [name, course and year, age, email address, contact number]
         """
+        # try-except-finally code is actually useless,
+        # but is left as it is just in case ;)
         try:
             # open JSON file and get its contents
             json_file = open("student-list.json", "r")
@@ -61,3 +63,6 @@ class StudentDirectory(object):
 
     def check_if_student_exist(self, student_number):
         return self.stud_dir_dict.get(student_number) != None
+
+    def get_stud_dir_dict(self):
+        return self.stud_dir_dict
