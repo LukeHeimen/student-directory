@@ -12,6 +12,7 @@ class GUI(object):
             stud_dir: 
         """
         self.window = None
+        # data: No. | StudNum | Name | C&Y | Age | Email | ContactNum
         self.data = [ ["    ", "", "                  ", "",
                  "    ", "                         ", ""] ]
         self.input_keys = ["-SN-", "-NAME-", "-CY-", "-AGE-",
@@ -63,11 +64,19 @@ class GUI(object):
                                 size=(1300, 500), use_default_focus=False)
         self.window.finalize()
 
+        # remove empty entry in table and replace it
+        # with data in the student directory
+        self.data.pop()
+        for key, values in self.stud_dir.get_stud_dir_dict().items():
+            self.data += [ [str(len(self.data) + 1)] ]
+            self.data[len(self.data) - 1] += [key]
+            for value in values:
+                self.data[len(self.data) - 1] += [value]
+        self.window["-TABLE-"].update(values=self.data)
+
     def gui_loop(self):
         # Event Loop to process "events" and get the "values" of the inputs
-        self.data.pop()
-        self.window["-TABLE-"].update(values=self.data)
-        data_index = -1
+        data_index = len(self.data)
         operation = 0 # 0 = -VIEW-; 1 = -EDIT-; 2 = -DELETE-
         row_no = 0 # the location of data to be edited
 
@@ -103,6 +112,7 @@ class GUI(object):
                 if choice == "Yes":
                     self.data.clear()
                     self.window["-TABLE-"].update(values=self.data)
+                    self.stud_dir.clear_student_directory()
                     data_index = -1
                 elif choice == "No":
                     pass
@@ -120,10 +130,10 @@ class GUI(object):
 
                         if i == (len(self.input_keys) - 1):
                             self.window["-TABLE-"].update(values=self.data)
-                            for key in self.input_keys:
-                                self.window[key].update(value="",
-                                                        disabled=True)
-                            self.window["-ENTER-"].update(disabled=True)
+                            self.stud_dir.edit_student_details(
+                                    self.data[row_no][1],
+                                    self.data[row_no][2:7])
+                            self.reset(False, True, True, True)
                 else: # ADD STUDENT
                     broken = False # checker if for loop is broken
                     if data_index == -1:
@@ -140,6 +150,9 @@ class GUI(object):
                     if not broken:
                         self.window["-TABLE-"].update(values=self.data)
                         self.reset(False, True, True, True)
+                        self.stud_dir.add_new_student(
+                                    self.data[data_index][1],
+                                    self.data[data_index][2:7])
                         data_index += 1
             if event == "-SEARCH-":
                 if operation in (0, 1):
@@ -178,6 +191,7 @@ class GUI(object):
                                 row_no = int(data_row[0]) - 1
                                 data_index = self.student_delete_popup(
                                                 value, row_no, data_index)
+                                self.stud_dir.delete_student(value)
                                 counter = 0
                                 break
                             else:
@@ -188,6 +202,7 @@ class GUI(object):
                     if counter > 0:
                         sg.popup("Student number does not exist!")
 
+        self.stud_dir.save_changes()
         self.window.close()
 
     def reset(self, is_edit, keys_dis, enter_dis, search_dis):
